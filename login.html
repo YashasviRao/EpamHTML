@@ -12,7 +12,6 @@
 		
 			<ul class="left">
 				<li><input id="check" class="btn" type="button" onclick="check()" value=""></li>
-				<!--<li><input class="btn" type="submit" target="about.php" value="About"></li>-->
 			</ul>
 		</div>
 
@@ -20,10 +19,10 @@
 		
 			<div class="boxx" id="login">
 				
-				<form method="POST" action="">
+				<form method="POST" id="form1" action="">
 					
 					<label for="email">Email ID&nbsp;&nbsp;&nbsp;</label>
-					<input  type="email" class="box" name="email" id="email" value="" placeholder="Email ID" ><br>
+					<input  type="email" class="box" name="email" id="email" value="" placeholder="Email ID"><br>
 					<br><br>
 					
 					<label for="password">Password&nbsp;&nbsp;&nbsp;</label>
@@ -38,7 +37,7 @@
 
 			<div class="boxx" id="register">
 				
-				<form method="POST" action="">
+				<form method="POST" id="form2" action="">
 					
 				<label  for="fname">First Name&nbsp;&nbsp;&nbsp;</label>
 				<input class="box" type="text" name="fname" id="fname" value="" placeholder="First Name"><br><br><br>
@@ -81,7 +80,6 @@
 		document.getElementById('register').style="display:none;";
 		document.getElementById('login').style="display:block;";
 		document.getElementById('check').value="Register";
-		//document.getElementById('header').style="display:none";
 		isLoginEmpty();
 	}
 	function check () {
@@ -101,55 +99,67 @@
 		}
 		
 	}
-	function validation()
-	{
-		
-		
-			var value=document.getElementById('email').value;
-			if(value=="")
-			{
-
-				document.getElementById('er').innerHTML="Incorrect Email Address";
-
-			}
-			else
-			  document.getElementById('er').innerHTML="";
-		
-	}
-	function validation1()
-	{
-		
-		var check=document.getElementById('email1').type;
-		if(check=="email")
-		{
-			var value=document.getElementById('email1').value;
-			if(value=="")
-			{
-
-				document.getElementById('er1').innerHTML="Incorrect Email Address";
-
-			}
-			else
-			  document.getElementById('er1').innerHTML="";
-		}
-	}
+	function ValidateEmail(inputText)
+    {
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;   
+      if(inputText.match(mailformat))
+      {
+        return true;
+       }
+      else
+      {
+        return false;
+      }
+    }
+	function ValidateEmail1(inputText)
+    {
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;   
+      if(inputText.match(mailformat))
+      {
+        return true;
+       }
+      else
+      {
+        return false;
+      }
+    }
+	function phonenumber(inputtxt)
+    {
+      var phoneno = /^\d{10}$/;
+      if(inputtxt.match(phoneno))
+      {
+        return true;
+      }
+     else
+      {
+        alert("Not a valid Phone Number");
+        return false;
+      }
+    }
     function isLoginEmpty()
 	{
-		<!--validation();-->
+		
 		var checkEmail=document.getElementById('email').value;
 	    var checkPwd=document.getElementById('password').value;
+	       
+			 if(checkEmail==""||checkPwd=="")
+			 { 
+  
+	 			document.getElementById('error').innerHTML="Fill in all the details";
+ 
+    	     }
+			 else 
+			 {
+			  if(ValidateEmail(checkEmail))
+			  {
+	            document.getElementById('error').innerHTML="User Logged in!";
+				document.getElementById('error').style="color:black";
+				
+		      }
+			  else
+			     document.getElementById('error').innerHTML="You have entered an invalid email address!";
+		     }
 			
-			if(checkEmail==""||checkPwd=="")
-			{
-
-				document.getElementById('error').innerHTML="Fill in all the details";
-
-			}
-			else 
-			{
-	           document.getElementById('error').innerHTML="User Logged in!";
-			   document.getElementById('error').style="color:black";
-		    }
 	}
 	function isRegEmpty()
 	{
@@ -166,9 +176,17 @@
 			}
 			else
 			{
-	          document.getElementById('error1').innerHTML="User registered successfully!";
-			  document.getElementById('error1').style="color:black"
+			 if(phonenumber(checkMobile))
+			  if(ValidateEmail1(checkEmail))
+			  {
+	            document.getElementById('error1').innerHTML="User registered successfully!";
+			    document.getElementById('error1').style="color:black"
 			  }
+			  else
+			     document.getElementById('error1').innerHTML="You have entered an invalid email address!";
+				 
+			}
+			
 	}
 
 
